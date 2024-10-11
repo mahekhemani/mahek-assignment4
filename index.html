@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LSA Search Engine</title>
+</head>
+<body>
+    <h1>LSA Search Engine</h1>
+    <form method="POST">
+        <input type="text" name="query" placeholder="Enter your search query" required>
+        <button type="submit">Search</button>
+    </form>
+    {% if results %}
+        <h2>Search Results for "{{ query }}"</h2>
+        <ul>
+            {% for doc, score in results %}
+                <li>
+                    <strong>Similarity Score:</strong> {{ score }}<br>
+                    <p>{{ doc }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+        <h2>Cosine Similarity Chart</h2>
+        <img src="{{ url_for('static', filename='similarity_chart.png') }}" alt="Cosine Similarity Chart">
+    {% endif %}
+</body>
+</html>
